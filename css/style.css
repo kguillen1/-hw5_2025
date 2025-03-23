@@ -1,0 +1,708 @@
+/* Notes: The CSS Flexbox Layout should be used for one-dimensional layout, with rows OR columns */
+
+/* Notes: The CSS Grid Layout should be used for two-dimensional layout, with rows AND columns. */
+
+/* You MUST comment your code
+Help us understand what your code is trying to do */
+
+/* Objectives:
+Demonstrate ability to submit proper URL when file is not named index.html
+
+Demonstrate ability to use the flex display.
+
+Demonstrate ability to create a media query to change the layout on the screen by adjusting flex.
+
+Demonstrate the ability to create a media query to create a printout that matches our example.
+
+Demonstrate ability to code a working animation and then disable it with a media query. */
+
+/* DO NOT CHANGE THE FILE NAMES. */
+
+/* The following specifications are for the default view (this should not have a media query on it) */
+
+
+/* Notes:
+header and nav links to be using flex.
+
+cards are all the same exact length across (width)
+
+rounded edges
+
+gallery changes with flex
+
+when refresh the page, animation at the top. this is for the default mobile view
+
+desktop: navgation and menu more spread out.
+
+on the large screen, the header stays, when scrolling
+
+final view is the print mode, control p , will have a different look
+
+thumbs up emoji icons...second challenge
+
+media query...reduced motion... */
+
+
+/* CODE STARTS HERE: */
+
+/* Step #1: Animate the logo with keyframes. It should start at a width of 25px and grow to 475px.  It should also start with an opacity of 0 and end with an opacity of 1. The animation should take 5 seconds and only happen when the page is loaded */
+
+/* For this I referred to the w3 school link. For the first part, i have to define the keyframes which is what controls the steps in an animation sequence. Then I have to state directly what I am targeting which is the logo in this case and I have to refer back to the keyframes so it knows what animation to use. I then assign it its time of 5 seconds.  */
+@keyframes logoGrow{
+    from{
+        width: 25px;
+        opacity: 0;
+    }
+    to{
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+#logo {
+    width: 25px;
+    opacity: 0;
+    animation: logoGrow 5s ease-out forwards;
+}
+
+/* Step #2: Edit the body element to use the Poppins font (using Google fonts) with serif as a backup.  It should also use the image “concrete_seamless.png” as a background-image with a backup color of #f1f1f1. */
+
+/* Here I am editing the body in order to use the Poppins font with serif as a backup. Since I am using a a font from outside even though it is one word,I am including quotations. I then an adding "concrete_seamness.pmg" as the background image. I am also using the color #f1f1f1 as a backup */
+body{
+    font-family: "Poppins", serif;
+    background-image: url("../images/concrete_seamless.png");
+    background-color: #f1f1f1;
+}
+
+
+/* Step #3: Edit the css for the header tag (all instances) to use flex to match our example. */
+
+/* header is what is going to be edited, and here I am using flex for it in order to try to make it match the example. In this case, the header is centered, in which the logo is on the center of the page with the menu below it and also centered*/
+
+header{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Step #4: Edit the css for the nav_links class to use flex to match our example. Do not modify the list items or the links - modify the nav_links class to use flex. */
+
+/* There is only one instance of nav_links, but its in the unordered list that is wrapping around all of the other links, so I am adding flex to the container that has the different links inside of it. Aditionally since this is a class, I have to include a period before nav_links. By doing this, it changes how the menu looks, so I have to include an additional step in order to make it look like the way before */
+.nav_links{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Step #5: Style the links so that they have the same color even after they have been visited. */
+
+/* According to w3 schools, the :visited pseudo-class select and styles the links that have been visited. I am using the a:link and a:visited to make sure that the links are the same color even after they have been visited.*/
+
+/* changing the color to match the picture */
+.nav_links a {
+    color: #2529ff;
+}
+
+a:link, a:visited{
+    color: #2529ff;
+}
+
+
+/* Step #6:
+Identify the proper selector to style ONLY those header elements that are direct children of a card class.  The required styling is the following:
+background: #288088,
+solid 2px border using #45ADAD,
+20px of padding on the top and the bottom,
+50px border-radius on the top left and right corners.  */
+
+/* I am not interested in grabbing every single header element, I only want to grab the header elements that are direct children of the card class, meaning i only want the ones inside of the card class. I then add the color for the background as well as a solid border that is 2px and #45ADAD. As for the padding, i use the shorthand to use for the top and the bottom which is padding: I then move on to the border-radius to apply it to the top and the left coerns which is what gives it the rounded/curved look. */
+.card > header{
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0;
+    /* border-radius: 50px; */
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/* Ensure that the parent have corners as well. */
+.card {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+
+/* Step #7: Edit the css for the card class to match our example. Achieve this by using a flex-property to specify an initial “size” of 450px.  You need to think about this from a “flex” perspective and realize that flex-direction will affect the size of the elements.  You can see that in the mobile view they all have the same width.  */
+
+/* Now I really want to make sure that the elements maintain a consistent width of 450px as well as have it align properly. I am using flex to do this. I use the flex-direction: column in order to stack the cards and then flex so that it does not change its structure*/
+
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    flex: 0 0 450px;
+}
+
+/* Step #8: Edit the css for the pricing class to match our example. You should use flex and the cards should be centered both horizontally and vertically. */
+
+/* Flex-direction:column is to ensure that the elements are vertically stacked. align-items is to ensure that the elements are centered horizontally. */
+
+.pricing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Step #9: Style the images in the gallery class. These elements will have a solid 10px border with a color of #50C7C7, 10px margin on all four sides and a width of 300px. */
+
+/* I am using the calss selector to target the images in the gallery class. Border: allows me to insert the kind of border I want which is a solid one in this case (as opposed to a dotted or dashed one) then 10px gives me the thickness of it while #50C7C7 is the color. Margin: 10px is to give me the space around the image. Finally, width: 300px is to give me the width of the image. */
+
+.gallery img{
+    border: solid 10px #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+/* Edit the css for the gallery class to use flex to match our example. (You may want to look at the screen shots from 1200px and 1500px as well -  the changes are not from media queries, but from the use of flex.) */
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Step #11: Edit the css for the header tag (all instances) and the nav_links class to match our example using flex-properties. The logo should be as far to the left as possible and the links as far to the right as possible. Use flex properties, NOT position properties. */
+
+/* For this struggled a lot!!!! I have no idea how to fix the underline problem at all, but as for the other parts, i played around in inspect with flex */
+
+@media (min-width: 900px){
+    body > header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* now i am ensuring that the prices (h3) are centered left of the container */
+    /* .card h3 {
+        text-align: left;
+    } */
+
+    /* and that did not work so no im trying something else */
+/*
+    .card h3 {
+        display: flex;
+        justify-content: flex-start;
+    } */
+
+    /* that also did not work, so now im trying something else */
+    /* .card h3 {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    } */
+
+
+    /* that also did not work....even after trying to use inspect and testing flex. */
+    /* .card > header {
+        text-align: left;
+    }
+
+    .card > header h3 {
+        margin: 0;
+    } */
+
+    /* that also did not work */
+
+    /* .card {
+        display: flex;
+        flex-direction: column;
+        width: 275px;
+        flex: 0 0 275px;
+    }
+
+    .card > header {
+        text-align: left;
+    }
+
+    .card > header h3 {
+        margin: 0;
+    }
+
+    .card ul header {
+        text-align: center;
+    } */
+
+    /* the above also did not work....so now i am just testing a bunch of different things. With this I hope this is specific enough */
+    .card > header h3 {
+        text-align: left;
+    }
+
+    /* the above also did not work. So now I am trying something else in order to be even more specific */
+
+    .card > header {
+        display: block;
+    }
+
+    .card > header h3 {
+        text-align: left;
+    }
+
+/* for the nav links i also played around with flex in inspect, in order to find something that matched the images */
+    .nav_links {
+        display: flex;
+        flex-direction: row;
+    }
+
+/* Step #12: Edit the css for the pricing and card classes to match our example. Part of achieving this is by using a flex-property to specify a “size” of 275px. Notice that the elements do not have the same height, but do have the same width. */
+
+    .pricing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: 275px;
+        flex: 0 0 275px;
+    }
+
+    /* step #13: Modify the first header (the one not inside main) so that it remains visible at the top of the screen even as we scroll down. Make sure that it is always visible. */
+
+    /* i use position:sticky because according to w3schools it toggles between realtive and fixed.It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). i also included top because the site also says that "You must specify at least one of top, right, bottom or left for sticky positioning to work." And in this case i want to to stick to the top of the page. then the z-index makes sure that it is on top of everything else. */
+
+    body > header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    /* step #14: The following specifications are for when the user prefers reduced motion.*/
+
+    /* used a reference from w3 school, in order to get the query. i also added width so that the impage appears at the size it ends on as well as opacity so that it is visible. */
+
+    @media (prefers-reduced-motion: reduce) {
+        #logo {
+            animation: none;
+            width: 475px;
+        opacity: 1;
+    }
+        }
+}
+
+/* now i am chaning the view for the print mode */
+@media print {
+    /* Change the font on your body to Arial with a backup value of  Helvetica. So i am changing the font so that it will change when it is in print. i also need to remove the background image*/
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+    /* Edit the nav/nav_links elements so that they are spaced. geninuenly have no idea how to do this after 3 hours on just this alone. */
+
+    /* .nav_links {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        padding: 0;
+        margin: 0;
+    }
+    .nav_links li {
+        list-style: none;
+        display: inline-block;
+    }
+    .nav_links a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    } */
+    /* no */
+
+    /* .nav_links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    .nav_links li {
+        list-style: none;
+        flex: 1;
+        text-align: center;
+    } */
+
+    /* not working */
+
+    /* .nav_links{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav_links li {
+        list-style: none;
+        flex: 1;
+        text-align: center;
+    }
+
+    .nav_links li:first-child {
+        text-align: left;
+    }
+
+    .nav_links li:nth-child(2) {
+        text-align: center;
+    }
+
+    .nav_links li:last-child {
+        text-align: right;
+    } */
+
+    /* even when i play around with inspect, i am not able to get it. */
+
+    /* .nav_links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .nav_links li {
+        flex: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav_links li a {
+        display: inline-block;
+    } */
+
+    /* still not working */
+
+    /* .nav_links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .nav_links li {
+        flex: 1;
+        text-align: center;
+    }
+    .nav_links li:first-child {
+        text-align: left;
+    }
+
+    .nav_links li:nth-child(2) {
+        text-align: center;
+    }
+
+    .nav_links li:last-child {
+        text-align: right;
+    } */
+
+    /* still not working */
+/*
+    .nav_links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav_links .nav_item {
+        display: inline-block;
+        width: 30%;
+        text-align: center;
+        box-sizing: border-box;
+      } */
+
+    /* still not working */
+
+    /* .nav_links {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .nav_links .nav_item {
+        float: left;
+        width: 33.33%;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .nav_links .nav_item a {
+        color: black;
+        text-decoration: underline;
+      } */
+
+    /* still not working */
+
+    /* .nav_links {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav_links .nav_item {
+        display: block;
+        text-align: center;
+      }
+
+      .nav_links .nav_item a {
+        display: inline;
+        padding: 0 10%;
+      } */
+
+    /* still not working */
+    /* .nav_links {
+        padding: 0;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav_links .nav_item {
+        display: inline;
+        margin: 0 5%;
+      } */
+
+    /* still not working */
+
+    /* .nav_links{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    } */
+
+    /* still not working */
+
+    /* .nav_links {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .nav_links li {
+        list-style: none;
+        flex: 1;
+        text-align: center;
+    }
+
+    .nav_links li:first-child {
+        text-align: left;
+    }
+
+    .nav_links li:last-child {
+        text-align: right;
+    } */
+
+    /* still not working */
+
+    /* .nav_links {
+        display: block;
+      }
+
+      .nav_links li {
+        display: contents;
+      }
+
+      .nav_links a {
+        display: inline;
+        margin-right: 8em;
+      } */
+
+    /* the above worked by no stacking them, but the spacing is not right. So now i am trying to fix that. */
+
+    /* nav_links {
+        display: block;
+        text-align: center;
+        word-spacing: 5em;
+
+      .nav_links li {
+        display: contents;
+      }
+
+      .nav_links a {
+        display: inline;
+      } */
+
+    /* adjsuting the padding so that there is equal spacing and that it takes up more space them before. also making sure they are no stacked */
+
+      /* .nav_links {
+        display: block;
+        text-align: center;
+      }
+
+      .nav_links li {
+        display: contents;
+      }
+
+      .nav_links a {
+        display: inline;
+        padding: 0 4em;
+      } */
+
+    /* the above woked, but since we're working on flex, wanted to figure out how to do it lik e this. i out flex direction:column group them and the flex direction put them in a row and i did it so it would take up the full space with equal spacing  */
+
+      nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav_links {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    /* step #18: Edit the pricing class so that the elements align along the bottom.  As long as it aligns along the bottom we don't care if the cards aren't the same height. */
+
+    /* .pricing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      .card {
+        width: 275px;
+        flex: 0 0 275px;
+        margin: 10px;
+      } */
+
+      /* pricing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .card {
+        flex: 1 1 auto;
+        margin: 10px;
+      } */
+
+      /* .pricing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: 275px;
+        flex: 0 0 275px;
+    } */
+
+    /* .pricing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .card {
+        width: 275px;
+        flex: 0 0 275px;
+        margin: 10px;
+      } */
+
+      /* pricing {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+      }
+
+      .card {
+        width: 33%;
+        page-break-inside: avoid;
+        transform: scale(0.9);
+        margin: 0 5px;
+      } */
+
+      /* for this part i worked on still using flex and putting them in a row, i used the previous answer as a guide to help me figure it out. the .pricing allowed the elements to align along the bottom, that said just finishing at that part, made them too big for print mode so i inlcude .card which gave them a max width and made sure they didnt break up or overfill the page */
+
+        .pricing {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .card {
+            flex: 1 1 30%;
+            max-width: 30%;
+            box-sizing: border-box;
+            margin: 0 5px;
+            page-break-inside: avoid;
+          }
+
+    /* Step 19: The card elements should have a solid border 2px of #45ADDD and use flex-basis of 325px.  */
+
+    /* i am targeting the card class and then i am adding a solid border that is 2px and #45ADDD. I am also using flex-basis of 325px. */
+
+    .card {
+        border: 2px solid #45ADDD;
+        flex-basis: 325px;
+    }
+
+    /* step #20: No part of the gallery should be visible. */
+
+    /* Now i am ensureing that there are no images that pop up using .gallery that being said the word 'gallery' still shows up so i independently target it and make sure that it does not show up. */
+
+    .gallery {
+        display: none;
+    }
+
+    h2#gallery{
+        display: none;
+    }
+
+
+    /* Step #21: Without using list-style-type add the thumbs up entity as shown in the cards */
+
+    /* I looked it up and i am using unicode characters of the emoji/icon and this is being used with content: property. I am also using the ::after pseudo-element to add the icon after the text. I am also using the nth-child selector to target the second list item in the card class */
+
+    .card > ul li:nth-child(2)::after {
+        content: "\1F44D ";
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
